@@ -8,7 +8,7 @@ to be flipped back and forth, as well as enhancing the design of the card. Three
 
 ### App Walk-though
 
-<img src="https://s3.amazonaws.com/img0.recordit.co/A61qVr3yIi.mp4?AWSAccessKeyId=AKIAUQ5RURZ7ND2T2B6I&Expires=1646019992&Signature=q%2BXpJU4zN3ZKODjGX56XIHxSVqs%3D" width=200><br>
+<img src="http://g.recordit.co/A61qVr3yIi.gif" width=200><br>
 
 ## Required
 - [x] Create New Project in Android Studio
