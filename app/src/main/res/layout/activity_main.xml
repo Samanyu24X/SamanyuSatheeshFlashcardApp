@@ -11,9 +11,13 @@
         android:id="@+id/flashcard_question_textview"
         android:layout_width="match_parent"
         android:layout_height="200dp"
+        android:layout_marginTop="25sp"
         android:gravity="center"
+        android:background="@drawable/card_background"
+        android:elevation="5dp"
+        android:textColor="@color/black"
         android:text="Who is the 44th President of the United States?"
-        android:textSize="40sp" />
+        android:textSize="45sp" />
 
     <TextView
         android:id="@+id/flashcard_answer_textview"
@@ -21,7 +25,44 @@
         android:visibility="invisible"
         android:layout_height="200dp"
         android:gravity="center"
+        android:background="#ffe100"
         android:text="Barack Obama"
-        android:textSize="40sp" />
+        android:textSize="45sp" />
+
+    <TextView
+        android:id="@+id/answer_option_one"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/flashcard_question_textview"
+        android:layout_marginTop="100sp"
+        android:gravity="center"
+        android:background="#FFD293"
+        android:textColor="@color/black"
+        android:text="Bill Clinton"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/answer_option_two"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/answer_option_one"
+        android:layout_marginTop="25sp"
+        android:gravity="center"
+        android:background="#FFD293"
+        android:textColor="@color/black"
+        android:text="George H. W. Bush"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/answer_option_three"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/answer_option_two"
+        android:layout_marginTop="25sp"
+        android:gravity="center"
+        android:background="#FFD293"
+        android:textColor="@color/black"
+        android:text="Barack Obama"
+        android:textSize="30sp" />
 
 </RelativeLayout>
