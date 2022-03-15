@@ -3,7 +3,7 @@
 ## Lab 2
 
 ### App Description
-Flashcard App that allows user to create a new card or edit an existing one, with save and cancel options in the process. The flashcard can be flipped back and forth, and there is also a multiple choice functionality under the flashcard. The design of the card has been modified, and the multiple choice options change color to signify if they are correct or incorrect. There is added logic to revert the multiple choice answer colors back to normal when returning to the main activity.
+Flashcard App that allows user to create a new card or edit an existing one, with save and cancel options in the process. The flashcard can be flipped back and forth, and there is also a multiple choice functionality under the flashcard. The design of the card has been modified, and the multiple choice options change color to signify if they are correct or incorrect. There is added logic to revert the multiple choice answer colors back to normal when returning to the main activity. The user is also alerted if they did not fill out the question/answer fields, as well as if they successfully created a new card.
 
 ### App Walk-though
 <img src="http://g.recordit.co/6sXQjRFbQL.gif" width=200><br>
