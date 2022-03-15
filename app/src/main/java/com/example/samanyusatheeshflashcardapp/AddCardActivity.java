@@ -19,12 +19,19 @@ public class AddCardActivity extends AppCompatActivity {
         ImageView flashcardCancel = findViewById(R.id.flashcard_cancel_button);
         ImageView flashcardSave = findViewById(R.id.flashcard_save_button);
         EditText flashcardEditQuestion = findViewById(R.id.flashcard_edit_question);
-        EditText flashcardEditAnswer = findViewById(R.id.flashcard_edit_answer);
+        EditText flashcardEditRightAnswer = findViewById(R.id.flashcard_edit_rightanswer);
+        EditText flashcardEditWrongAnswer1 = findViewById(R.id.flashcard_edit_wronganswer1);
+        EditText flashcardEditWrongAnswer2 = findViewById(R.id.flashcard_edit_wronganswer2);
 
         String question = getIntent().getStringExtra("question");
-        String answer = getIntent().getStringExtra("answer");
+        String rightAnswer = getIntent().getStringExtra("rightAnswer");
+        String wrongAnswer1 = getIntent().getStringExtra("wrongAnswer1");
+        String wrongAnswer2 = getIntent().getStringExtra("wrongAnswer2");
+
         flashcardEditQuestion.setText(question);
-        flashcardEditAnswer.setText(answer);
+        flashcardEditRightAnswer.setText(rightAnswer);
+        flashcardEditWrongAnswer1.setText(wrongAnswer1);
+        flashcardEditWrongAnswer2.setText(wrongAnswer2);
 
 
         flashcardCancel.setOnClickListener(new View.OnClickListener() {
@@ -38,16 +45,22 @@ public class AddCardActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String saveQuestion = flashcardEditQuestion.getText().toString();
-                String saveAnswer = flashcardEditAnswer.getText().toString();
-                if (saveQuestion.matches("") || saveAnswer.matches(""))
+                String saveRightAnswer = flashcardEditRightAnswer.getText().toString();
+                String saveWrongAnswer1 = flashcardEditWrongAnswer1.getText().toString();
+                String saveWrongAnswer2 = flashcardEditWrongAnswer2.getText().toString();
+
+                if (saveQuestion.matches("") || saveRightAnswer.matches("")
+                    || saveWrongAnswer1.matches("") || saveWrongAnswer2.matches(""))
                 {
-                    Toast.makeText(getApplicationContext(), "Must enter both question and answer!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Must enter question and answers!", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 Intent data = new Intent();
                 data.putExtra("QUESTION_KEY", saveQuestion);
-                data.putExtra("ANSWER_KEY", saveAnswer);
+                data.putExtra("RIGHTANSWER_KEY", saveRightAnswer);
+                data.putExtra("WRONGANSWER1_KEY", saveWrongAnswer1);
+                data.putExtra("WRONGANSWER2_KEY", saveWrongAnswer2);
                 setResult(RESULT_OK, data);
                 finish();
             }

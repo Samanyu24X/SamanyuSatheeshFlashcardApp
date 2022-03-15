@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
     TextView flashcardQuestion;
     TextView flashcardAnswer;
+    TextView answerChoiceOne, answerChoiceTwo, answerChoiceThree;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,9 +25,9 @@ public class MainActivity extends AppCompatActivity {
 
         flashcardQuestion = findViewById(R.id.flashcard_question_textview);
         flashcardAnswer = findViewById(R.id.flashcard_answer_textview);
-        TextView answerChoiceOne = findViewById(R.id.answer_option_one);
-        TextView answerChoiceTwo = findViewById(R.id.answer_option_two);
-        TextView answerChoiceThree = findViewById(R.id.answer_option_three);
+        answerChoiceOne = findViewById(R.id.answer_option_one);
+        answerChoiceTwo = findViewById(R.id.answer_option_two);
+        answerChoiceThree = findViewById(R.id.answer_option_three);
         ImageView flashcardAdd = findViewById(R.id.flashcard_add_button);
         ImageView flashcardEdit = findViewById(R.id.flashcard_edit_button);
 
@@ -80,8 +81,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, AddCardActivity.class);
-                intent.putExtra("question", flashcardQuestion.getText());
-                intent.putExtra("answer", flashcardAnswer.getText());
+                intent.putExtra("question", flashcardQuestion.getText().toString());
+                intent.putExtra("rightAnswer", flashcardAnswer.getText().toString());
+                intent.putExtra("wrongAnswer1", answerChoiceOne.getText().toString());
+                intent.putExtra("wrongAnswer2", answerChoiceTwo.getText().toString());
                 MainActivity.this.startActivityForResult(intent, 100);
             }
         });
@@ -91,13 +94,25 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        answerChoiceOne.setBackgroundColor(getResources().getColor(R.color.my_tan, null));
+        answerChoiceTwo.setBackgroundColor(getResources().getColor(R.color.my_tan, null));
+        answerChoiceThree.setBackgroundColor(getResources().getColor(R.color.my_tan, null));
+
+
         if (requestCode == 100)
         {
             if (data != null) {
                 String questionString = data.getExtras().getString("QUESTION_KEY");
-                String answerString = data.getExtras().getString("ANSWER_KEY");
+                String rightAnswerString = data.getExtras().getString("RIGHTANSWER_KEY");
+                String wrongAnswer1String = data.getExtras().getString("WRONGANSWER1_KEY");
+                String wrongAnswer2String = data.getExtras().getString("WRONGANSWER2_KEY");
                 flashcardQuestion.setText(questionString);
-                flashcardAnswer.setText(answerString);
+                flashcardAnswer.setText(rightAnswerString);
+                answerChoiceOne.setText(wrongAnswer1String);
+                answerChoiceTwo.setText(wrongAnswer2String);
+                answerChoiceThree.setText(rightAnswerString);
+
             }
         }
         Snackbar.make(flashcardQuestion,
