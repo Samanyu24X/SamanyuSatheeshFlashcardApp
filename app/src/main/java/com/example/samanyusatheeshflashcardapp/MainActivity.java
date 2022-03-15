@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         TextView answerChoiceTwo = findViewById(R.id.answer_option_two);
         TextView answerChoiceThree = findViewById(R.id.answer_option_three);
         ImageView flashcardAdd = findViewById(R.id.flashcard_add_button);
+        ImageView flashcardEdit = findViewById(R.id.flashcard_edit_button);
 
         flashcardQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,6 +76,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        flashcardEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, AddCardActivity.class);
+                intent.putExtra("question", flashcardQuestion.getText());
+                intent.putExtra("answer", flashcardAnswer.getText());
+                MainActivity.this.startActivityForResult(intent, 100);
+            }
+        });
+
     }
 
     @Override
@@ -87,5 +100,9 @@ public class MainActivity extends AppCompatActivity {
                 flashcardAnswer.setText(answerString);
             }
         }
+        Snackbar.make(flashcardQuestion,
+                "Successfully saved card!",
+                Snackbar.LENGTH_SHORT)
+                .show();
     }
 }
