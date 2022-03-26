@@ -6,7 +6,8 @@
 Flashcard App utilizing a database that allows the user to create a new card or edit an existing one, with save and cancel options in the process. The flashcard can be flipped back and forth, and there is also a multiple choice functionality under the flashcard. The user can also switch between cards using the next button, which returns to the beginning once the last card is reached, and the user can delete a card using the trash button. The design of the card has been modified, and the multiple choice options change color to signify if they are correct or incorrect. There is added logic to revert the multiple choice answer colors back to normal when returning to the main activity. The user is also alerted if they did not fill out the question/answer fields, as well as if they successfully created a new card.
 
 ### App Walk-though
-<img src="http://g.recordit.co/pLxViotxAf.gif" width="200" height="400" />  
+<img src="http://g.recordit.co/pLxViotxAf.gif" width="200" height="400" />
+<img src="http://g.recordit.co/Mb8zzBAqiw.gif" width="200" height="400" />
 
 ## Required
 - [X] User can create a card and still see their created card when the app is relaunched.
