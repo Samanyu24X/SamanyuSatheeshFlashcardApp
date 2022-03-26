@@ -16,7 +16,6 @@
         android:background="@drawable/question_card_background"
         android:elevation="5dp"
         android:textColor="@color/black"
-        android:text="Who is the 44th President of the United States?"
         android:textSize="45sp" />
 
     <TextView
@@ -40,7 +39,6 @@
         android:gravity="center"
         android:background="#FFD293"
         android:textColor="@color/black"
-        android:text="Bill Clinton"
         android:textSize="30sp" />
 
     <TextView
@@ -52,7 +50,6 @@
         android:gravity="center"
         android:background="#FFD293"
         android:textColor="@color/black"
-        android:text="George H. W. Bush"
         android:textSize="30sp" />
 
     <TextView
@@ -64,7 +61,6 @@
         android:gravity="center"
         android:background="#FFD293"
         android:textColor="@color/black"
-        android:text="Barack Obama"
         android:textSize="30sp" />
 
     <ImageView
@@ -91,5 +87,13 @@
         android:layout_below="@id/flashcard_question_textview"
         android:layout_marginTop="25sp"
         android:layout_alignParentEnd="true"/>
+
+    <ImageView
+        android:id="@+id/flashcard_delete_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_delete"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

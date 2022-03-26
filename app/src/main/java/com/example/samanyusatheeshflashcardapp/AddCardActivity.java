@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 public class AddCardActivity extends AppCompatActivity {
 
+    String originalQuestion;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +26,7 @@ public class AddCardActivity extends AppCompatActivity {
         EditText flashcardEditWrongAnswer2 = findViewById(R.id.flashcard_edit_wronganswer2);
 
         String question = getIntent().getStringExtra("question");
+        originalQuestion = question;
         String rightAnswer = getIntent().getStringExtra("rightAnswer");
         String wrongAnswer1 = getIntent().getStringExtra("wrongAnswer1");
         String wrongAnswer2 = getIntent().getStringExtra("wrongAnswer2");
@@ -56,12 +59,15 @@ public class AddCardActivity extends AppCompatActivity {
                     return;
                 }
 
+                // find the flashcard these belong to
+
                 Intent data = new Intent();
                 data.putExtra("QUESTION_KEY", saveQuestion);
                 data.putExtra("RIGHTANSWER_KEY", saveRightAnswer);
                 data.putExtra("WRONGANSWER1_KEY", saveWrongAnswer1);
                 data.putExtra("WRONGANSWER2_KEY", saveWrongAnswer2);
                 setResult(RESULT_OK, data);
+                System.out.println("Packed everything up!");
                 finish();
             }
         });
