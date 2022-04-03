@@ -2,13 +2,18 @@ package com.example.samanyusatheeshflashcardapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.animation.Animator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewAnimationUtils;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.plattysoft.leonids.ParticleSystem;
 
 import org.w3c.dom.Text;
 
@@ -63,6 +68,25 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 flashcardQuestion.setVisibility(View.INVISIBLE);
                 flashcardAnswer.setVisibility(View.VISIBLE);
+
+                // get the center for the clipping circle
+
+                int cx = flashcardAnswer.getWidth() / 2;
+                int cy = flashcardAnswer.getHeight() / 2;
+
+                // get the final radius for the clipping circle
+                float finalRadius = (float) Math.hypot(cx, cy);
+
+                // create the animator for this view (the start radius is zero)
+                Animator anim = ViewAnimationUtils.createCircularReveal(flashcardAnswer, cx, cy, 0f, finalRadius);
+
+                // hide the question and show the answer to prepare for playing the animation!
+                flashcardQuestion.setVisibility(View.INVISIBLE);
+                flashcardAnswer.setVisibility(View.VISIBLE);
+
+                anim.setDuration(3000);
+                anim.start();
+
             }
         });
         flashcardAnswer.setOnClickListener(new View.OnClickListener() {
@@ -70,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 flashcardAnswer.setVisibility(View.INVISIBLE);
                 flashcardQuestion.setVisibility(View.VISIBLE);
+
             }
         });
 
@@ -93,6 +118,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 findViewById(R.id.answer_option_three).setBackgroundColor(getResources().getColor(R.color.my_green_color, null));
+                new ParticleSystem(MainActivity.this, 100, R.drawable.confetti, 3000)
+                        .setSpeedRange(0.2f, 0.5f)
+                        .oneShot(findViewById(R.id.answer_option_three), 100);
             }
         });
 
@@ -101,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, AddCardActivity.class);
                 MainActivity.this.startActivityForResult(intent,100);
+                overridePendingTransition(R.anim.right_in, R.anim.left_out);
             }
         });
 
@@ -108,29 +137,62 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, AddCardActivity.class);
+
+                if (allFlashCards.size() == 0)
+                {
+                    intent.putExtra("question", "");
+                    intent.putExtra("rightAnswer", "");
+                    intent.putExtra("wrongAnswer1", "");
+                    intent.putExtra("wrongAnswer2", "");
+                    MainActivity.this.startActivityForResult(intent, 200);
+                    overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                    return;
+                }
+
                 intent.putExtra("question", flashcardQuestion.getText().toString());
                 intent.putExtra("rightAnswer", flashcardAnswer.getText().toString());
                 intent.putExtra("wrongAnswer1", answerChoiceOne.getText().toString());
                 intent.putExtra("wrongAnswer2", answerChoiceTwo.getText().toString());
+
                 for (int index = 0; index < allFlashCards.size(); index++)
                 {
                     if (allFlashCards.get(index).getQuestion().equals(flashcardQuestion.getText().toString()))
                     {
                         cardToEdit = allFlashCards.get(index);
-                        System.out.println("Found the card to edit at index " + index);
                         break;
                     }
                 }
                 MainActivity.this.startActivityForResult(intent, 200);
+                overridePendingTransition(R.anim.right_in, R.anim.left_out);
             }
         });
 
         flashcardNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final Animation leftOutAnim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.left_out);
+                final Animation rightInAnim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.right_in);
+
                 answerChoiceOne.setBackgroundColor(getResources().getColor(R.color.my_tan, null));
                 answerChoiceTwo.setBackgroundColor(getResources().getColor(R.color.my_tan, null));
                 answerChoiceThree.setBackgroundColor(getResources().getColor(R.color.my_tan, null));
+                flashcardQuestion.startAnimation(leftOutAnim);
+
+                leftOutAnim.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        flashcardQuestion.startAnimation(rightInAnim);
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+                        // we don't need to worry about this method
+                    }
+                });
 
                 if (allFlashCards.size() == 0)
                     return;
@@ -163,6 +225,8 @@ public class MainActivity extends AppCompatActivity {
                     flashcardQuestion.setText("Add a question!");
                     flashcardAnswer.setText("Add an answer!");
                     answerChoiceOne.setText("Add answer choices!");
+                    answerChoiceTwo.setText("");
+                    answerChoiceThree.setText("");
                     return;
                 }
                 else if (currentCardDisplayedIndex == 0)
