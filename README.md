@@ -1,5 +1,24 @@
 ## Flashcard App for Mobile App Development - Android
 
+## Lab 4
+
+### App Description
+Flashcard App utilizing a database that allows the user to create a new card or edit an existing one, with save and cancel options in the process. The flashcard can be flipped back and forth, and there is also a multiple choice functionality under the flashcard. The user can also switch between cards using the next button, which returns to the beginning once the last card is reached, and the user can delete a card using the trash button. The design of the card has been modified, and the multiple choice options change color to signify if they are correct or incorrect. There is added logic to revert the multiple choice answer colors back to normal when returning to the main activity. The user is also alerted if they did not fill out the question/answer fields, as well as if they successfully created a new card. Additional animations and styling have been added to add to the user experience.
+
+### App Walk-though
+`TODO://` Add the URL to your animated app walk-though `gif` in the image tag below. Make sure the gif actually renders and animates when viewing this README. (☝️ Remove this paragraph after after adding gif)
+
+<img src="http://g.recordit.co/4WeU25nLlr.gif" width=200><br>
+
+## Required
+- [x] User sees a transition animation when going from the main screen to the add card screen.
+- [x] User sees a reveal animation when the flashcard is tapped and the answer is shown
+- [x] User sees flashcards animating in / out when the 'next' button is tapped
+
+## Optional
+- [x] Extra styling is added!
+- [x] User sees a celebration animation with confetti when they answer a question correctly
+
 ## Lab 3
 
 ### App Description
